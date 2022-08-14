@@ -1,0 +1,87 @@
+@import url(//db.onlinewebfonts.com/c/1dd8d81c8ec73dac8887c1243a771e56?family=LifeCraft);
+@import url(//db.onlinewebfonts.com/c/4d83027149f6eac947091989b45a7da4?family=FrizQuadrata);
+
+body {
+    background: #111;
+    color: azure;
+    font-family: 'FrizQuadrata';
+    text-align: center;
+}
+
+table {
+    display: flex;
+    justify-content: center;
+    margin: 1em;
+}
+h1 {
+    font-family: 'LifeCraft';
+    letter-spacing: 0.25em;
+    font-weight: lighter;
+}
+
+tr {
+    background: linear-gradient(to bottom, #222, #333, #222, #111);
+}
+
+
+
+td {
+    padding: 0 1em;
+    font-size: 1.25em;
+}
+
+.tabdata {
+    background: red;
+}
+
+.deathknight {
+    color: #C41E3A;
+}
+
+.demonhunter {
+    color: #A330C9;
+}
+
+.druid {
+    color: #FF7C0A;
+}
+
+.evoker {
+    color: #33937F;
+}
+
+.hunter {
+    color: #AAD372;
+}
+
+.mage {
+    color: #3FC7EB;
+}
+
+.monk {
+    color: #00FF98;
+}
+
+.paladin {
+    color: #F48CBA;
+}
+
+.priest {
+    color: #FFFFFF;
+}
+
+.rogue {
+    color: #FFF468;
+}
+
+.shaman {
+    color: #0070DD;
+}
+
+.warlock {
+    color: #8788EE;
+}
+
+.warrior {
+    color: #C69B6D;
+}
