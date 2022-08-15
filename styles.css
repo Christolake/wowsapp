@@ -1,86 +1,196 @@
 @import url(//db.onlinewebfonts.com/c/1dd8d81c8ec73dac8887c1243a771e56?family=LifeCraft);
 @import url(//db.onlinewebfonts.com/c/4d83027149f6eac947091989b45a7da4?family=FrizQuadrata);
 
-.deathknight {
-    color: #C41E3A;
+:root {
+    --dcolor: #111;
+    --deathknight: #C41E3A;
+    --demonhunter: #A330C9;
+    --druid: #FF7C0A;
+    --evoker: #33937F;
+    --hunter: #AAD372;
+    --mage: #3FC7EB;
+    --monk: #00FF98;
+    --paladin: #F48CBA;
+    --priest: #FFFFFF;
+    --rogue: #FFF468;
+    --shaman: #0070DD;
+    --warlock: #8788EE;
+    --warrior: #C69B6D;
+    --poor: #9d9d9d;
+    --common: #ffffff;
+    --uncommon: #1eff00;
+    --rare: #0070dd;
+    --epic: #a335ee;
+    --legendary: #ff8000;
+    --artifact: #e6cc80;
+    --heirloom: #00ccff;
 }
 
-.demonhunter {
-    color: #A330C9;
+
+.deathknight:not([data-theme=light]) {
+    color: var(--deathknight);
+}
+.deathknight:not([data-theme=dark]) {
+    background-color: var(--deathknight);
+    color: var(--dcolor);
 }
 
-.druid {
-    color: #FF7C0A;
+.demonhunter:not([data-theme=light]) {
+    color: var(--demonhunter);
+}
+.demonhunter:not([data-theme=dark]) {
+    background-color: var(--demonhunter);
+    color: var(--dcolor);
 }
 
-.evoker {
-    color: #33937F;
+.druid:not([data-theme=light]) {
+    color: var(--druid);
 }
 
-.hunter {
-    color: #AAD372;
+.druid:not([data-theme=dark]) {
+    background-color: var(--druid);
 }
 
-.mage {
-    color: #3FC7EB;
+.evoker:not([data-theme=light]) {
+    color: var(--evoker);
 }
 
-.monk {
-    color: #00FF98;
+.evoker:not([data-theme=dark]) {
+    background-color: var(--evoker);
 }
 
-.paladin {
-    color: #F48CBA;
+.hunter:not([data-theme=light])  {
+    color: var(--hunter);
 }
 
-.priest {
-    color: #FFFFFF;
+.hunter:not([data-theme=dark])  {
+    background-color: var(--hunter);
 }
 
-.rogue {
-    color: #FFF468;
+.mage:not([data-theme=light])  {
+    color: var(--mage);
 }
 
-.shaman {
-    color: #0070DD;
+.mage:not([data-theme=dark])  {
+    background-color: var(--mage);
 }
 
-.warlock {
-    color: #8788EE;
+.monk:not([data-theme=light])  {
+    color: var(--monk);
 }
 
-.warrior {
-    color: #C69B6D;
+.monk:not([data-theme=dark])  {
+    background-color: var(--monk);
 }
 
-.poor {
-    color: #9d9d9d;
+.paladin:not([data-theme=light])  {
+    color: var(--paladin);
 }
 
-.common {
-    color: #ffffff;
+.paladin:not([data-theme=dark])  {
+    background-color: var(--paladin);
 }
 
-.uncommon {
-    color: #1eff00;
+.priest:not([data-theme=light])  {
+    color: var(--priest);
 }
 
-.rare {
-    color: #0070dd;
+.priest:not([data-theme=dark])  {
+    background-color: var(--priest);
 }
 
-.epic {
-    color: #a335ee;
+.rogue:not([data-theme=light])  {
+    color: var(--rogue);
 }
 
-.legendary {
-    color: #ff8000;
+.rogue:not([data-theme=dark])  {
+    background-color: var(--rogue);
 }
 
-.artifact {
-    color: #e6cc80;
+.shaman:not([data-theme=light])  {
+    color: var(--shaman);
 }
 
-.heirloom {
-    color: #00ccff;
+.shaman:not([data-theme=dark])  {
+    background-color: var(--shaman);
+}
+
+.warlock:not([data-theme=light])  {
+    color: var(--warlock);
+}
+
+.warlock:not([data-theme=dark])  {
+    background-color: var(--warlock);
+}
+
+.warrior:not([data-theme=light])  {
+    color: var(--warrior);
+}
+
+.warrior:not([data-theme=dark])  {
+    background-color: var(--warrior);
+}
+
+.poor:not([data-theme=light])  {
+    color: var(--poor);
+}
+
+.poor:not([data-theme=dark])  {
+    background-color: var(--poor);
+}
+
+.common:not([data-theme=light])  {
+    color: var(--common);
+}
+
+.common:not([data-theme=dark])  {
+    background-color: var(--common);
+}
+
+.uncommon:not([data-theme=light])  {
+    color: var(--uncommon);
+}
+
+.uncommon:not([data-theme=dark])  {
+    background-color: var(--uncommon);
+}
+
+.rare:not([data-theme=light])  {
+    color: var(--rare);
+}
+
+.rare:not([data-theme=dark])  {
+    background-color: var(--rare);
+}
+
+.epic:not([data-theme=light])  {
+    color: var(--epic);
+}
+
+.epic:not([data-theme=dark])  {
+    background-color: var(--epic);
+}
+
+.legendary:not([data-theme=light])  {
+    color: var(--legendary);
+}
+
+.legendary:not([data-theme=dark])  {
+    background-color: var(--legendary);
+}
+
+.artifact:not([data-theme=light])  {
+    color: var(--artifact);
+}
+
+.artifact:not([data-theme=dark])  {
+    background-color: var(--artifact);
+}
+
+.heirloom:not([data-theme=light])  {
+    color: var(--heirloom);
+}
+
+.heirloom:not([data-theme=dark])  {
+    background-color: var(--heirloom);
 }

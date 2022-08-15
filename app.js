@@ -78,7 +78,11 @@ const emRace = {
     bloodelf: '🧝🏽‍♂️',
     darkirondwarf: '👴🏿',
     draener: '🐙',
-    dracthyr: '🐲',
+    dracthyr: {
+        Alliance: '🦎',
+        Horde: '🐊',
+        Neutral: '🐛'
+    },
     dwarf: '👨🏽‍🦰',
     gnome: '👶🏽',
     goblin: '👺',
@@ -91,7 +95,11 @@ const emRace = {
     nightborne: '🌚',
     nightelf: '👽',
     orc: '🧌',
-    pandaren: '🐼',
+    pandaren: {
+        Alliance: '🐻‍❄️',
+        Horde: '🐼',
+        Neutral: '🐨'
+    },
     tauren: '🐮',
     troll: '🐭',
     undead: '⚰️',
@@ -167,18 +175,24 @@ function whoIs(str = 'lakhae') {
     : ''
     }
 
-    console.log(whoIs())
-
 function rarity(lv) {
-    if(lv<15) return 'poor'
-    else if(lv<50) return 'common'
-    else if(lv<100) return 'uncommon'
-    else if(lv<180) return 'rare'
-    else if(lv<250) return 'epic'
-    else if(lv<300) return 'legendary'
-    else if(lv<320) return 'artifact'
+    if(lv<20) return 'poor'
+    else if(lv<93) return 'common'
+    else if(lv<158) return 'uncommon'
+    else if(lv<183) return 'rare'
+    else if(lv<252) return 'epic'
+    else if(lv<291) return 'legendary'
+    else if(lv<350) return 'artifact'
     else return 'heirloom'
 }
+
+const pageTheme = document.querySelector('html')
+
+function addTheme() {
+    if (pageTheme.getAttribute('data-theme') == 'light') return 'light'
+    else return 'dark'
+}
+
 
 function App() {
 
@@ -190,7 +204,6 @@ function App() {
         fetch(characterUrl+characterRealm+'/'+search+urlParams+token)
         .then(res => res.json())
         .then(data => data.hasOwnProperty('code') ? alert(`${search.charAt(0).toUpperCase()+search.slice(1)} not found`) : setPlayer(current => [...current, data]))
-        
     }
 
     return html`
@@ -204,7 +217,7 @@ function App() {
                     </ul>
                     <ul>
                         <li><a href='#'>Clear list</a></li>
-                        <li><a href='#' role='button'>Share</a></li>
+                        <li><a href='#' role="button">Share</a></li>
                     </ul>
                 </nav>
             </header>
@@ -217,7 +230,7 @@ function App() {
                     </select>
                 </label>
                     <label for "realm">Realm
-                    <select name="realm">
+                    <select id="realmSlug" name="realm">
                         <option value="demon-soul">Demon Soul</option>
                         <option value="drakkari">Drakkari</option>
                         <option value="quelthalas">Quel'Thalas</option>
@@ -228,7 +241,7 @@ function App() {
             </form>
             <input placeholder="Search your character" onInput=${handleInput}></input>
             <button role='button' onClick=${handleSubmit}>🔍</button>
-                <table >
+                <table role="grid">
                     <thead >
                         <tr >
                             <th scope="col">Name</th>
@@ -238,18 +251,20 @@ function App() {
                         </tr>
                     </thead>
                     <tbody >
-                        ${player.map(e => html`<tr scope="row" className=${e.character_class.name.replace(/\s/g, '').toLowerCase()}>
-                            <td className=${e.character_class.name.replace(/\s/g, '').toLowerCase()}>${e.name}</td>
-                            <td className=${e.character_class.name.replace(/\s/g, '').toLowerCase()}>${e.race.name}</td>
-                            <td className=${e.character_class.name.replace(/\s/g, '').toLowerCase()}>${e.active_spec?.name ? e.active_spec?.name+' '+e.character_class.name : e.character_class.name}</td>
-                            <td style="white-space: pre-wrap" className=${rarity(e.average_item_level)}><small>${e.level}\t</small><strong>${e.average_item_level}</strong></td>
+                        ${player.map(e => html`<tr scope="row" data-theme=${addTheme()} className=${e.character_class.name.replace(/\s/g, '').toLowerCase()}>
+                            <td data-theme=${addTheme()} className=${e.character_class.name.replace(/\s/g, '').toLowerCase()}>${e.name}</td>
+                            <td data-theme=${addTheme()} className=${e.character_class.name.replace(/\s/g, '').toLowerCase()}>${e.race.name}</td>
+                            <td data-theme=${addTheme()} className=${e.character_class.name.replace(/\s/g, '').toLowerCase()}>${e.active_spec?.name ? e.active_spec?.name+' '+e.character_class.name : e.character_class.name}</td>
+                            <td data-theme=${addTheme()} style="white-space: pre-wrap" className=${rarity(e.average_item_level)}><small>${e.level}\t</small><strong>${e.average_item_level}</strong></td>
                         </tr>`)}
                     </tbody>
                 </table>
-                <article style="white-space: pre-wrap">
-                    ${player.map(e => 
-                        emFaction[e.faction.name]+
-                        emRace[e.race.name.replace(/\s|\'/g, '').toLowerCase()]+
+
+                <article class="container" style="white-space: pre-wrap; text-align: center; width: 50vw">
+                    ${player.sort((a, b) => b.average_item_level-a.average_item_level).map(e => 
+                        (typeof emRace[e.race.name.replace(/\s|\'/g, '').toLowerCase()] === 'object'
+                        ? emRace[e.race.name.replace(/\s|\'/g, '').toLowerCase()][e.faction.name]
+                        : emRace[e.race.name.replace(/\s|\'/g, '').toLowerCase()])+
                         emClass[e.character_class.name.replace(/\s/g, '').toLowerCase()]+
                         (typeof emSpec[e.active_spec?.name.toLowerCase()] === 'object'
                         ? emSpec[e.active_spec.name.toLowerCase()][e.character_class.name.replace(/\s/g, '').toLowerCase()]
