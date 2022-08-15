@@ -75,9 +75,9 @@ const emClass = {
 }
 
 const emRace = {
-    bloodelf: '🧝🏽‍♂️',
+    bloodelf: '🧝🏼‍♂️',
     darkirondwarf: '👴🏿',
-    draener: '🐙',
+    draenei: '🐙',
     dracthyr: {
         Alliance: '🦎',
         Horde: '🐊',
@@ -176,12 +176,12 @@ function whoIs(str = 'lakhae') {
     }
 
 function rarity(lv) {
-    if(lv<20) return 'poor'
-    else if(lv<93) return 'common'
+    if(lv<68) return 'poor'
+    else if(lv<148) return 'common'
     else if(lv<158) return 'uncommon'
-    else if(lv<183) return 'rare'
-    else if(lv<252) return 'epic'
-    else if(lv<291) return 'legendary'
+    else if(lv<187) return 'rare'
+    else if(lv<265) return 'epic'
+    else if(lv<305) return 'legendary'
     else if(lv<350) return 'artifact'
     else return 'heirloom'
 }
@@ -201,9 +201,14 @@ function App() {
 
     const handleInput = (e) => {setSearch(e.target.value.toLowerCase())}
     const handleSubmit = () => {
+        if (!player.some(e => e.name.toLowerCase() === search)) {
         fetch(characterUrl+characterRealm+'/'+search+urlParams+token)
         .then(res => res.json())
         .then(data => data.hasOwnProperty('code') ? alert(`${search.charAt(0).toUpperCase()+search.slice(1)} not found`) : setPlayer(current => [...current, data]))
+        }
+        else {
+            alert('The name you provided is invalid or already exists in the table')
+        }
     }
 
     return html`
@@ -270,14 +275,15 @@ function App() {
                         ? emSpec[e.active_spec.name.toLowerCase()][e.character_class.name.replace(/\s/g, '').toLowerCase()]
                         : emSpec[e.active_spec?.name.toLowerCase()])+
                         (e.level >= 60 
-                            ? Array.from(String(e.average_item_level).padStart(3, 0), Number).map(e => emNumbers[e])
-                            : Array.from(String(e.level).padStart(3, 0), Number).map(e => emNumbers[e]))+'\n'
+                            ? Array.from(String(e.average_item_level).padStart(3, 0), Number).map(e => emNumbers[e]).join().replaceAll(',','')
+                            : Array.from(String(e.level).padStart(3, 0), Number).map(e => emNumbers[e]).join().replaceAll(',',''))+'\n'
                         )}
                 </article>
                 </main>
                 <br />
-                <article>
-                </article>
+                <footer>
+                Christopher Selva - 2022
+                </footer>
             </Fragment>`;
 }
 
