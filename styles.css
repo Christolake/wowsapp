@@ -1,35 +1,6 @@
 @import url(//db.onlinewebfonts.com/c/1dd8d81c8ec73dac8887c1243a771e56?family=LifeCraft);
 @import url(//db.onlinewebfonts.com/c/4d83027149f6eac947091989b45a7da4?family=FrizQuadrata);
 
-body {
-    background: #111;
-    color: azure;
-    font-family: 'FrizQuadrata';
-    text-align: center;
-}
-
-table {
-    display: flex;
-    justify-content: center;
-    margin: 1em;
-}
-h1 {
-    font-family: 'LifeCraft';
-    letter-spacing: 0.25em;
-    font-weight: lighter;
-}
-
-tr {
-    background: linear-gradient(to bottom, #222, #333, #222, #111);
-}
-
-
-
-td {
-    padding: 0 1em;
-    font-size: 1.25em;
-}
-
 .deathknight {
     color: #C41E3A;
 }
@@ -80,4 +51,36 @@ td {
 
 .warrior {
     color: #C69B6D;
+}
+
+.poor {
+    color: #9d9d9d;
+}
+
+.common {
+    color: #ffffff;
+}
+
+.uncommon {
+    color: #1eff00;
+}
+
+.rare {
+    color: #0070dd;
+}
+
+.epic {
+    color: #a335ee;
+}
+
+.legendary {
+    color: #ff8000;
+}
+
+.artifact {
+    color: #e6cc80;
+}
+
+.heirloom {
+    color: #00ccff;
 }

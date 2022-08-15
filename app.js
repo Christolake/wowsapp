@@ -6,7 +6,7 @@ const clientId = '2d789520a6304a59ad74c43a0fa07e45'
 const clientSecret = 'grupx1AhF3A8Xusk0W4Sd5VED1OBLlJt'
 const authUrl = 'https://us.battle.net/oauth/token'
 
-let token, API, characterName, ilvlArray;
+let token, API, characterName
 
 const emSpec = {
     blood: '🧛🏽‍♂️',
@@ -169,6 +169,16 @@ function whoIs(str = 'lakhae') {
 
     console.log(whoIs())
 
+function rarity(lv) {
+    if(lv<15) return 'poor'
+    else if(lv<50) return 'common'
+    else if(lv<100) return 'uncommon'
+    else if(lv<180) return 'rare'
+    else if(lv<250) return 'epic'
+    else if(lv<300) return 'legendary'
+    else if(lv<320) return 'artifact'
+    else return 'heirloom'
+}
 
 function App() {
 
@@ -184,50 +194,72 @@ function App() {
     }
 
     return html`
-        <Fragment>
-            <h1>WoWsapp</h1>
+        <Fragment >
+            <header >
+                <nav className='container'>
+                    <ul>
+                        <li>
+                            <h2>WoWsapp</h2>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li><a href='#'>Clear list</a></li>
+                        <li><a href='#' role='button'>Share</a></li>
+                    </ul>
+                </nav>
+            </header>
+            <main className='container' >
             <form>
-                <label for "region">Region </label>
-                <select name="region">
-                    <option value="us">US</option>
-                </select>
-                <label for "realm">Realm </label>
-                <select name="realm">
-                    <option value="demon-soul">Demon Soul</option>
-                    <option value="drakkari">Drakkari</option>
-                    <option value="quelthalas">Quel'Thalas</option>
-                    <option value="ragnaros">Ragnaros</option>
-                </select>
+            <div className='grid'>
+                <label for "region">Region
+                    <select name="region">
+                        <option value="us">US</option>
+                    </select>
+                </label>
+                    <label for "realm">Realm
+                    <select name="realm">
+                        <option value="demon-soul">Demon Soul</option>
+                        <option value="drakkari">Drakkari</option>
+                        <option value="quelthalas">Quel'Thalas</option>
+                        <option value="ragnaros">Ragnaros</option>
+                    </select>
+                    </label>
+                </div>
             </form>
             <input placeholder="Search your character" onInput=${handleInput}></input>
-            <button onClick=${handleSubmit}>🔍</button>
-            <p>${search}</p>
-                <table>
-                    <tbody>
-                        <tr style="background: linear-gradient(to bottom, #777, #aaa, #777, #333); color: black">
-                            <td>Name</td><td>Race</td><td>Class</td><td>Spec</td><td>iLevel</td><td>Emoji</td>
+            <button role='button' onClick=${handleSubmit}>🔍</button>
+                <table >
+                    <thead >
+                        <tr >
+                            <th scope="col">Name</th>
+                            <th scope="col">Race</th>
+                            <th scope="col">Class</th>
+                            <th scope="col">Level</th>
                         </tr>
-                        ${player.map(e => html`<tr className=${e.character_class.name.replace(/\s/g, '').toLowerCase()}>
-                            <td>${e.name}</td><td>${e.race.name}</td>
-                            <td>${e.character_class.name}</td>
-                            <td>${e.active_spec?.name}</td>
-                            <td>${e.level >= 60 ? e.average_item_level : e.level}</td>
-                            <td className=${e.name+' emoData'}>
-                                ${
-
-                                emFaction[e.faction.name]+
-                                emRace[e.race.name.replace(/\s|\'/g, '').toLowerCase()]+
-                                emClass[e.character_class.name.replace(/\s/g, '').toLowerCase()]+
-                                (typeof emSpec[e.active_spec?.name.toLowerCase()] === 'object'
-                                ? emSpec[e.active_spec.name.toLowerCase()][e.character_class.name.replace(/\s/g, '').toLowerCase()]
-                                : emSpec[e.active_spec?.name.toLowerCase()])
-                                }${e.level >= 60 
-                                    ? Array.from(String(e.average_item_level).padStart(3, 0), Number).map(e => emNumbers[e])
-                                    : Array.from(String(e.level).padStart(3, 0), Number).map(e => emNumbers[e])}   
-                            </td>
+                    </thead>
+                    <tbody >
+                        ${player.map(e => html`<tr scope="row" className=${e.character_class.name.replace(/\s/g, '').toLowerCase()}>
+                            <td className=${e.character_class.name.replace(/\s/g, '').toLowerCase()}>${e.name}</td>
+                            <td className=${e.character_class.name.replace(/\s/g, '').toLowerCase()}>${e.race.name}</td>
+                            <td className=${e.character_class.name.replace(/\s/g, '').toLowerCase()}>${e.active_spec?.name ? e.active_spec?.name+' '+e.character_class.name : e.character_class.name}</td>
+                            <td style="white-space: pre-wrap" className=${rarity(e.average_item_level)}><small>${e.level}\t</small><strong>${e.average_item_level}</strong></td>
                         </tr>`)}
                     </tbody>
                 </table>
+                <article style="white-space: pre-wrap">
+                    ${player.map(e => 
+                        emFaction[e.faction.name]+
+                        emRace[e.race.name.replace(/\s|\'/g, '').toLowerCase()]+
+                        emClass[e.character_class.name.replace(/\s/g, '').toLowerCase()]+
+                        (typeof emSpec[e.active_spec?.name.toLowerCase()] === 'object'
+                        ? emSpec[e.active_spec.name.toLowerCase()][e.character_class.name.replace(/\s/g, '').toLowerCase()]
+                        : emSpec[e.active_spec?.name.toLowerCase()])+
+                        (e.level >= 60 
+                            ? Array.from(String(e.average_item_level).padStart(3, 0), Number).map(e => emNumbers[e])
+                            : Array.from(String(e.level).padStart(3, 0), Number).map(e => emNumbers[e])+'\n')
+                        )}
+                </article>
+                </main>
                 <br />
                 <article>
                 </article>
