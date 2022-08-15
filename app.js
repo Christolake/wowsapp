@@ -256,7 +256,7 @@ function App() {
                         : emSpec[e.active_spec?.name.toLowerCase()])+
                         (e.level >= 60 
                             ? Array.from(String(e.average_item_level).padStart(3, 0), Number).map(e => emNumbers[e])
-                            : Array.from(String(e.level).padStart(3, 0), Number).map(e => emNumbers[e])+'\n')
+                            : Array.from(String(e.level).padStart(3, 0), Number).map(e => emNumbers[e]))+'\n'
                         )}
                 </article>
                 </main>
