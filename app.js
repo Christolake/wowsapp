@@ -57,7 +57,6 @@ const emSpec = {
     fury: '😡',
     undefined: '❌'
 }
-
 const emClass = {
     deathknight: '☠️',
     demonhunter: '😈',
@@ -73,7 +72,6 @@ const emClass = {
     warlock: '🪬',
     warrior: '⚔️'
 }
-
 const emRace = {
     bloodelf: '🧝🏼‍♂️',
     darkirondwarf: '👴🏿',
@@ -108,21 +106,21 @@ const emRace = {
     worgen: '🐺',
     zandalaritroll: '🦖'
 }
-
 const emFaction = {
     Alliance: '🔵',
     Horde: '🔴',
     Neutral: '🟢'
 }
-
-const examplePlayer = {
-    name: 'Lakexya',
+const examplePlayer = [{
+    npc: true,
+    name: 'Neltharion',
     faction: {
         name: 'Neutral'
     },
     character_class: {
         name: 'Evoker'
     },
+    title: 'the Worldbreaker',
     race: {
         name: 'Dracthyr'
     },
@@ -131,8 +129,97 @@ const examplePlayer = {
         name: 'Devastation'
     },
     average_item_level: 312
-}
-
+},{
+    npc: true,
+    name: 'Illidan',
+    faction: {
+        name: 'Alliance'
+    },
+    character_class: {
+        name: 'Demon Hunter'
+    },
+    title: 'the Betrayer',
+    race: {
+        name: 'Night Elf'
+    },
+    level: 60,
+    active_spec: {
+        name: 'Havoc'
+    },
+    average_item_level: 289
+},{
+    npc: true,
+    name: 'Arthas',
+    faction: {
+        name: 'Alliance'
+    },
+    character_class: {
+        name: 'Death Knight'
+    },
+    title: 'the Lick King',
+    race: {
+        name: 'Human'
+    },
+    level: 50,
+    active_spec: {
+        name: 'Frost'
+    },
+    average_item_level: 185
+},{
+    npc: true,
+    name: 'Tyrion',
+    faction: {
+        name: 'Alliance'
+    },
+    character_class: {
+        name: 'Paladin'
+    },
+    title: 'the Ashbringer',
+    race: {
+        name: 'Human'
+    },
+    level: 40,
+    active_spec: {
+        name: 'Retribution'
+    },
+    average_item_level: 150
+},{
+    npc: true,
+    name: 'Thrall',
+    faction: {
+        name: 'Horde'
+    },
+    character_class: {
+        name: 'Shaman'
+    },
+    title: 'the Earthbinder',
+    race: {
+        name: 'Orc'
+    },
+    level: 30,
+    active_spec: {
+        name: 'Enhancement'
+    },
+    average_item_level: 140
+},{
+    npc: true,
+    name: 'Chen',
+    faction: {
+        name: 'Neutral'
+    },
+    character_class: {
+        name: 'Monk'
+    },
+    title: 'the Wandering Brewmaster',
+    race: {
+        name: 'Pandaren'
+    },
+    level: 20,
+    active_spec: {
+        name: 'Brewmaster'
+    },
+    average_item_level: 65
+}]
 const emNumbers = {
     0: '0️⃣',
     1: '1️⃣',
@@ -170,11 +257,29 @@ const urlParams = '?namespace=profile-us&locale=en_US&access_token='
 
 initAuth()
 
-function whoIs(str = 'lakhae') {
-    str.includes('lak') ? '👨🏽‍💻' 
-    : ''
+function whoIs(str) {
+    let s = str.toLowerCase()
+    if (examplePlayer.some(e => e.name.toLowerCase() === s)) {
+        return '🎮'
     }
-
+    if (s.startsWith('lak')) {
+        return '👨🏻‍💻'
+    } else if (s.startsWith('elnil')||s.startsWith('nil')){
+        return '😏'
+    } else if (s.startsWith('beta')||s.startsWith('bata')){
+        return '👳🏽‍♂️'
+    } else if (s.includes('tat')||s.includes('kun')){
+        return '👮🏻‍♂️'
+    } else if (s.startsWith('ronin')){
+        return '🐷'
+    } else if (s.startsWith('axi')||s.includes('tara')){
+        return '🍋'
+    } else if (s.includes('yiz')||s.endsWith('mann')){
+        return '🙏🏻'
+    } else if (s.includes('tacon')){
+        return '🎅🏻'
+    } else { return '' }
+}
 function rarity(lv) {
     if(lv<68) return 'poor'
     else if(lv<148) return 'common'
@@ -196,7 +301,7 @@ function addTheme() {
 
 function App() {
 
-    const [player, setPlayer] = useState([examplePlayer])
+    const [player, setPlayer] = useState([examplePlayer[Math.floor(Math.random() * 6)]])
     const [search, setSearch] = useState('')
 
     const handleInput = (e) => {setSearch(e.target.value.toLowerCase())}
@@ -265,8 +370,9 @@ function App() {
                     </tbody>
                 </table>
 
-                <article class="container" style="white-space: pre-wrap; text-align: center; width: 50vw">
+                <article id="the-table" class="container" style="white-space: pre-wrap; text-align: center; width: 50vw">
                     ${player.sort((a, b) => b.average_item_level-a.average_item_level).map(e => 
+                        whoIs(e.name)+
                         (typeof emRace[e.race.name.replace(/\s|\'/g, '').toLowerCase()] === 'object'
                         ? emRace[e.race.name.replace(/\s|\'/g, '').toLowerCase()][e.faction.name]
                         : emRace[e.race.name.replace(/\s|\'/g, '').toLowerCase()])+
@@ -280,7 +386,6 @@ function App() {
                         )}
                 </article>
                 </main>
-                <br />
                 <footer>
                 Christopher Selva - 2022
                 </footer>
