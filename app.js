@@ -291,21 +291,17 @@ function rarity(lv) {
     else return 'heirloom'
 }
 
-const pageTheme = document.querySelector('html')
-
-function addTheme() {
-    if (pageTheme.getAttribute('data-theme') == 'light') return 'light'
-    else return 'dark'
-}
-
+const addTheme = () => document.querySelector('html').getAttribute('data-theme') == 'light' ? 'light' : 'dark'
 
 function App() {
 
     const [player, setPlayer] = useState([examplePlayer[Math.floor(Math.random() * 6)]])
     const [search, setSearch] = useState('')
+    const [table, setTable] = useState('')
 
     const handleInput = (e) => {setSearch(e.target.value.toLowerCase())}
     const handleSubmit = () => {
+        if (player[0]) { if (player[0].npc) player.shift()}
         if (!player.some(e => e.name.toLowerCase() === search)) {
         fetch(characterUrl+characterRealm+'/'+search+urlParams+token)
         .then(res => res.json())
@@ -326,8 +322,7 @@ function App() {
                         </li>
                     </ul>
                     <ul>
-                        <li><a href='#'>Clear list</a></li>
-                        <li><a href='#' role="button">Share</a></li>
+                        <li><a href='whatsapp://send?text=${window.encodeURIComponent(table)}' role="button">Share</a></li>
                     </ul>
                 </nav>
             </header>
@@ -370,8 +365,9 @@ function App() {
                     </tbody>
                 </table>
 
-                <article id="the-table" class="container" style="white-space: pre-wrap; text-align: center; width: 50vw">
-                    ${player.sort((a, b) => b.average_item_level-a.average_item_level).map(e => 
+                <article id="theTable" class="container" style="white-space: pre-wrap; text-align: center; width: 50vw">
+                        ${player.sort((a, b) => b.average_item_level-a.average_item_level).map((e, i) => 
+                        (i < 1 ? '' : '\n')+
                         whoIs(e.name)+
                         (typeof emRace[e.race.name.replace(/\s|\'/g, '').toLowerCase()] === 'object'
                         ? emRace[e.race.name.replace(/\s|\'/g, '').toLowerCase()][e.faction.name]
@@ -382,8 +378,9 @@ function App() {
                         : emSpec[e.active_spec?.name.toLowerCase()])+
                         (e.level >= 60 
                             ? Array.from(String(e.average_item_level).padStart(3, 0), Number).map(e => emNumbers[e]).join().replaceAll(',','')
-                            : Array.from(String(e.level).padStart(3, 0), Number).map(e => emNumbers[e]).join().replaceAll(',',''))+'\n'
+                            : Array.from(String(e.level).padStart(3, 0), Number).map(e => emNumbers[e]).join().replaceAll(',',''))
                         )}
+                        ${useEffect(() => setTable(document.querySelector('#theTable').innerText), player)}
                 </article>
                 </main>
                 <footer>
