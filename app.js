@@ -42,7 +42,7 @@ const emSpec = {
         paladin: '🚨',
         warrior: '🛡️'
     },
-    retribution: '⚜️',
+    retribution: '⚖️',
     discipline: '🪩',
     shadow: '👤',
     assassination: '🥷🏽',
@@ -246,6 +246,7 @@ function initAuth() {
             }
         })
         .then(res => {
+            console.log(res)
             token = res.data.access_token
             API = `https://us.api.blizzard.com/profile/wow/character/quelthalas/${characterName}?namespace=profile-us&locale=en_US&access_token=${token}`
         })
@@ -270,8 +271,8 @@ function whoIs(str) {
         return '👳🏽‍♂️'
     } else if (s.includes('tat')||s.includes('kun')){
         return '👮🏻‍♂️'
-    } else if (s.startsWith('ronin')){
-        return '🐷'
+    } else if (s.startsWith('ronin')||s.endsWith('ronin')){
+        return '🦦'
     } else if (s.startsWith('axi')||s.includes('tara')){
         return '🍋'
     } else if (s.includes('yiz')||s.endsWith('mann')){
@@ -285,7 +286,7 @@ function rarity(lv) {
     else if(lv<148) return 'common'
     else if(lv<158) return 'uncommon'
     else if(lv<187) return 'rare'
-    else if(lv<265) return 'epic'
+    else if(lv<275) return 'epic'
     else if(lv<305) return 'legendary'
     else if(lv<350) return 'artifact'
     else return 'heirloom'
@@ -298,6 +299,7 @@ function App() {
     const [player, setPlayer] = useState([examplePlayer[Math.floor(Math.random() * 6)]])
     const [search, setSearch] = useState('')
     const [table, setTable] = useState('')
+    const ARTESANOS = ['Lakhae', 'Elniloo', 'Kunfucion', 'Batacudruida', 'Ripyizuman', 'Tarahahun', 'Roninobu', 'Taconhyhunte']
 
     const handleInput = (e) => {setSearch(e.target.value.toLowerCase())}
     const handleSubmit = () => {
@@ -311,6 +313,14 @@ function App() {
             alert('The name you provided is invalid or already exists in the table')
         }
     }
+
+    const generateArtesanos = () => ARTESANOS.map(e => {
+        if (player[0]) { if (player[0].npc) player.shift()}
+        if (!player.some(e => e.name.toLowerCase() === search)) {
+        fetch(characterUrl+characterRealm+'/'+e.toLowerCase()+urlParams+token)
+        .then(res => res.json())
+        .then(data => data.hasOwnProperty('code') ? console.log(`${e.charAt(0).toUpperCase()+e.toLowerCase().slice(1)} not found`) : setPlayer(current => [...current, data]))
+    }})
 
     return html`
         <Fragment >
@@ -334,18 +344,12 @@ function App() {
                         <option value="us">US</option>
                     </select>
                 </label>
-                    <label for "realm">Realm
-                    <select id="realmSlug" name="realm">
-                        <option value="demon-soul">Demon Soul</option>
-                        <option value="drakkari">Drakkari</option>
-                        <option value="quelthalas">Quel'Thalas</option>
-                        <option value="ragnaros">Ragnaros</option>
-                    </select>
-                    </label>
+
                 </div>
             </form>
             <input placeholder="Search your character" onInput=${handleInput}></input>
-            <button role='button' onClick=${handleSubmit}>🔍</button>
+            <button type='submit' role='button' onClick=${handleSubmit}>🔍</button>
+            <button class="secondary" role='button' onClick=${generateArtesanos}>Generate Artesanos</button>
                 <table role="grid">
                     <thead >
                         <tr >
