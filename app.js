@@ -299,7 +299,7 @@ function App() {
     const [player, setPlayer] = useState([examplePlayer[Math.floor(Math.random() * 6)]])
     const [search, setSearch] = useState('')
     const [table, setTable] = useState('')
-    const ARTESANOS = ['Lakhae', 'Elniloo', 'Kunfucion', 'Batacudruida', 'Ripyizuman', 'Tarahahun', 'Roninobu', 'Taconhyhunte']
+    const ARTESANOS = ['Lakhae', 'Elniloo', 'Kunfucion', 'Batacudruida', 'Ripyizuman', 'Tarahahun', 'Onironin', 'Taconhyhunte']
 
     const handleInput = (e) => {setSearch(e.target.value.toLowerCase())}
     const handleSubmit = () => {
