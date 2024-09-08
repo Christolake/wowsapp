@@ -380,7 +380,7 @@ function App() {
                         (typeof emSpec[e.active_spec?.name.toLowerCase()] === 'object'
                         ? emSpec[e.active_spec.name.toLowerCase()][e.character_class.name.replace(/\s/g, '').toLowerCase()]
                         : emSpec[e.active_spec?.name.toLowerCase()])+
-                        (e.level >= 70 
+                        (e.level >= 80 
                             ? Array.from(String(e.average_item_level).padStart(3, 0), Number).map(e => emNumbers[e]).join().replaceAll(',','')
                             : Array.from(String(e.level).padStart(3, 0), Number).map(e => emNumbers[e]).join().replaceAll(',',''))
                         )}
