@@ -334,7 +334,7 @@ else {
             if (data.level > 70) {
             fetchHeroTalent(name, realm).then(hero => {
  if (hero.hasOwnProperty('active_hero_talent')) {
-     const newData = {...data, active_hero_talent: hero.active_hero_talent;
+     const newData = {...data, active_hero_talent: hero.active_hero_talent};
      setPlayer([...current, newData])
             }
 )
