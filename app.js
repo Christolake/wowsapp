@@ -352,7 +352,7 @@ return fetch(characterUrl+realm+'/'+name+'/'+characterSpecs+urlParams+token)
         .then(res => res.json())
 }
 
-    const handleInput = (e) => {setSearch(e.target.value.toLowerCase())}
+    const handleInput = (e) => {setSearch(e.target.value.toLowerCase());console.log(search)}
     const handleSubmit = () => {
         if (player[0]) { if (player[0].npc) player.shift()}
         if (!player.some(e => e.name.toLowerCase() === search)) {
