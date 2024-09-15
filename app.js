@@ -327,18 +327,24 @@ function App() {
         fetch(characterUrl+realm+'/'+name+urlParams+token)
         .then(res => res.json())
         .then(data => {
-if (data.hasOwnProperty('code')) {
-            alert(`${search.charAt(0).toUpperCase()+search.slie(1)} not found`);
-return}
-else if (data.level > 70) {
-            fetchHeroTalent(name, realm)
-                .then(hero => {
- if (hero.hasOwnProperty('active_hero_talent')) {
-     const newData = {...data, active_hero_talent: hero.active_hero_talent};
-     setPlayer([...current, newData])
-            } else {
-            setPlayer([...current, data])
-    }}}
+            if (data.hasOwnProperty('code')) {
+                alert(`${search.charAt(0).toUpperCase()+search.slie(1)} not found`);
+                return
+            }
+                else if (data.level > 70) {
+                    fetchHeroTalent(name, realm)
+                        .then(hero => {
+                            if (hero.hasOwnProperty('active_hero_talent')) {
+                                const newData = {...data, active_hero_talent: hero.active_hero_talent};
+                                setPlayer([...current, newData])
+                            }
+                        }
+                              )
+                }
+                            else { setPlayer([...current, data]) }
+                        }
+              )
+                    }
 
     async function fetchHeroTalent(name, realm) {
 return fetch(characterUrl+realm+'/'+name+'/'+characterSpecs+urlParams+token)
