@@ -8,6 +8,22 @@ const authUrl = 'https://us.battle.net/oauth/token'
 
 let token, API, characterName
 
+const adalid = {
+    explorer: 558,
+    adventurer: 571,
+    veteran: 584,
+    champion: 597,
+    hero: 610,
+    myth: 623,
+    deity: 636
+}
+
+const emHeroTalent = {
+    'Herald of the Sun': '☀️',
+    'Templar': '⚒️',
+    'Lightsmith': '🫕',
+}
+
 const emSpec = {
     blood: '🧛🏽‍♂️',
     frost: {
@@ -259,6 +275,7 @@ function initAuth() {
 
 const characterUrl = 'https://us.api.blizzard.com/profile/wow/character/'
 const characterRealm = 'quelthalas'
+const characterSpecs = 'specializations'
 const urlParams = '?namespace=profile-us&locale=en_US&access_token='
 
 initAuth()
@@ -287,13 +304,13 @@ function whoIs(str) {
     } else { return '' }
 }
 function rarity(lv) {
-    if(lv<558) return 'poor'
-    else if(lv<571) return 'common'
-    else if(lv<584) return 'uncommon'
-    else if(lv<597) return 'rare'
-    else if(lv<610) return 'epic'
-    else if(lv<623) return 'legendary'
-    else if(lv<639) return 'artifact'
+    if(lv<adalid.explorer) return 'poor'
+    else if(lv<adalid.adventurer) return 'common'
+    else if(lv<adalid.veteran) return 'uncommon'
+    else if(lv<adalid.champion) return 'rare'
+    else if(lv<adalid.hero) return 'epic'
+    else if(lv<adalid.myth) return 'legendary'
+    else if(lv<adalid.deity) return 'artifact'
     else return 'heirloom'
 }
 
@@ -304,7 +321,7 @@ function App() {
     const [player, setPlayer] = useState([examplePlayer[Math.floor(Math.random() * 6)]])
     const [search, setSearch] = useState('')
     const [table, setTable] = useState('')
-    const ARTESANOS = ['Lakhae', 'Elniloo', 'Kunfucion', 'Batacudruida', 'Ripyizuman', 'Tarahahun', 'Onironin', 'Taconhyhunte']
+    const ARTESANOS = ['Lakhae', 'Elniloo', 'Kunfucion', 'Batacura', 'Ripyizuman', 'Tarahahun', 'Onironin', 'Taconhyhunte']
 
     const handleInput = (e) => {setSearch(e.target.value.toLowerCase())}
     const handleSubmit = () => {
