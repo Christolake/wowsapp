@@ -287,13 +287,13 @@ function whoIs(str) {
     } else { return '' }
 }
 function rarity(lv) {
-    if(lv<68) return 'poor'
-    else if(lv<148) return 'common'
-    else if(lv<158) return 'uncommon'
-    else if(lv<187) return 'rare'
-    else if(lv<275) return 'epic'
-    else if(lv<305) return 'legendary'
-    else if(lv<350) return 'artifact'
+    if(lv<558) return 'poor'
+    else if(lv<571) return 'common'
+    else if(lv<584) return 'uncommon'
+    else if(lv<597) return 'rare'
+    else if(lv<610) return 'epic'
+    else if(lv<623) return 'legendary'
+    else if(lv<639) return 'artifact'
     else return 'heirloom'
 }
 
