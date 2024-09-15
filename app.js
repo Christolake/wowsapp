@@ -335,7 +335,7 @@ function App() {
                     fetchHeroTalent(name, realm)
                         .then(hero => {
                             if (hero.hasOwnProperty('active_hero_talent')) {
-                                const newData = {...data, active_hero_talent: hero.active_hero_talent};
+                                const newData = {...data, active_hero_talent_tree: hero.active_hero_talent_tree};
                                 setPlayer(current => ([...current, newData]))
                             }
                         }
@@ -424,6 +424,7 @@ return fetch(characterUrl+realm+'/'+name+'/'+characterSpecs+urlParams+token)
                         (typeof emSpec[e.active_spec?.name.toLowerCase()] === 'object'
                         ? emSpec[e.active_spec.name.toLowerCase()][e.character_class.name.replace(/\s/g, '').toLowerCase()]
                         : emSpec[e.active_spec?.name.toLowerCase()])+
+                            emHeroTalent[e.active_hero_talent_tree?.name.en_US]+
                         (e.level >= 80 
                             ? Array.from(String(e.average_item_level).padStart(3, 0), Number).map(e => emNumbers[e]).join().replaceAll(',','')
                             : Array.from(String(e.level).padStart(3, 0), Number).map(e => emNumbers[e]).join().replaceAll(',',''))
