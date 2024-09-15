@@ -323,6 +323,33 @@ function App() {
     const [table, setTable] = useState('')
     const ARTESANOS = ['Lakhae', 'Elniloo', 'Kunfucion', 'Batacura', 'Ripyizuman', 'Tarahahun', 'Onironin', 'Taconhyhunte']
 
+    async function fetchCharacter(name, realm) {
+        fetch(characterUrl+realm+'/'+name+urlParams+token)
+        .then(res => res.json())
+        .then(data => {
+if (data.hasOwnProperty('code')) {
+            alert(`${search.charAt(0).toUpperCase()+search.slie(1)} not found`);
+return}
+else {
+            if (data.level > 70) {
+            fetchHeroTalent(name, realm).then(hero => {
+ if (hero.hasOwnProperty('active_hero_talent')) {
+     const newData = {...data, active_hero_talent: hero.active_hero_talent;
+     setPlayer([...current, newData])
+            }
+)
+
+            }
+else {
+
+            : setPlayer(current => [...current, data]))
+    }}
+
+    async function fetchHeroTalent(name, realm) {
+return fetch(characterUrl+realm+'/'+name+'/'+characterSpecs+urlParams+token)
+        .then(res => res.json())
+}
+
     const handleInput = (e) => {setSearch(e.target.value.toLowerCase())}
     const handleSubmit = () => {
         if (player[0]) { if (player[0].npc) player.shift()}
