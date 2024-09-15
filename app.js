@@ -355,7 +355,7 @@ return fetch(characterUrl+realm+'/'+name+'/'+characterSpecs+urlParams+token)
     const handleSubmit = () => {
         if (player[0]) { if (player[0].npc) player.shift()}
         if (!player.some(e => e.name.toLowerCase() === search)) {
-        fetchCharacter(search, characterRealm)
+        fetchCharacter(search, 'quelthalas') }
     }
 
     const generateArtesanos = () => ARTESANOS.map(e => {
