@@ -82,6 +82,11 @@ const emRace = {
         Neutral: '🐛'
     },
     dwarf: '👨🏽‍🦰',
+    earthen: {
+        Alliance: '💎',
+        Horde: '🗿',
+        Neutral: '🪨'
+    },
     gnome: '👶🏽',
     goblin: '👺',
     highmountaintauren: '🏔️',
