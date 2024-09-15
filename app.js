@@ -336,9 +336,7 @@ else if (data.level > 70) {
  if (hero.hasOwnProperty('active_hero_talent')) {
      const newData = {...data, active_hero_talent: hero.active_hero_talent};
      setPlayer([...current, newData])
-            }
-                } else {
-
+            } else {
             setPlayer(current => [...current, data]))
     }}}
 
