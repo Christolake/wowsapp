@@ -337,7 +337,7 @@ else if (data.level > 70) {
      const newData = {...data, active_hero_talent: hero.active_hero_talent};
      setPlayer([...current, newData])
             } else {
-            setPlayer(current => [...current, data]))
+            setPlayer([...current, data])
     }}}
 
     async function fetchHeroTalent(name, realm) {
