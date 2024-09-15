@@ -330,20 +330,17 @@ function App() {
 if (data.hasOwnProperty('code')) {
             alert(`${search.charAt(0).toUpperCase()+search.slie(1)} not found`);
 return}
-else {
-            if (data.level > 70) {
-            fetchHeroTalent(name, realm).then(hero => {
+else if (data.level > 70) {
+            fetchHeroTalent(name, realm)
+                .then(hero => {
  if (hero.hasOwnProperty('active_hero_talent')) {
      const newData = {...data, active_hero_talent: hero.active_hero_talent};
      setPlayer([...current, newData])
             }
-)
+                } else {
 
-            }
-else {
-
-            : setPlayer(current => [...current, data]))
-    }}
+            setPlayer(current => [...current, data]))
+    }}}
 
     async function fetchHeroTalent(name, realm) {
 return fetch(characterUrl+realm+'/'+name+'/'+characterSpecs+urlParams+token)
