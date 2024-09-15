@@ -336,12 +336,12 @@ function App() {
                         .then(hero => {
                             if (hero.hasOwnProperty('active_hero_talent')) {
                                 const newData = {...data, active_hero_talent: hero.active_hero_talent};
-                                setPlayer([...current, newData])
+                                setPlayer(current => ([...current, newData]))
                             }
                         }
                               )
                 }
-                            else { setPlayer([...current, data]) }
+                            else { setPlayer(current => ([...current, data])) }
                         }
               )
                     }
