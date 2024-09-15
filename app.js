@@ -321,50 +321,56 @@ function App() {
     const [player, setPlayer] = useState([examplePlayer[Math.floor(Math.random() * 6)]])
     const [search, setSearch] = useState('')
     const [table, setTable] = useState('')
-    const ARTESANOS = ['Lakhae', 'Elniloo', 'Kunfucion', 'Batacura', 'Ripyizuman', 'Tarahahun', 'Onironin', 'Taconhyhunte']
+    const ARTESANOS = ['Lakhae', 'Elniloo', 'Kunfucion', 'Betacura', 'Ripyizuman', 'Tarahahun', 'Onironin', 'Taconhyhunte']
 
     async function fetchCharacter(name, realm) {
         fetch(characterUrl+realm+'/'+name+urlParams+token)
         .then(res => res.json())
         .then(data => {
             if (data.hasOwnProperty('code')) {
-                alert(`${search.charAt(0).toUpperCase()+search.slie(1)} not found`);
+                alert(`${search.charAt(0).toUpperCase()+search.slice(1)} not found`);
                 return
             }
                 else if (data.level > 70) {
+                    console.log('fetching Hero Talents')
                     fetchHeroTalent(name, realm)
                         .then(hero => {
-                            if (hero.hasOwnProperty('active_hero_talent')) {
+                            console.log(hero)
+                            if (hero.hasOwnProperty('active_hero_talent_tree')) {
                                 const newData = {...data, active_hero_talent_tree: hero.active_hero_talent_tree};
-                                setPlayer(current => ([...current, newData]))
+                                setPlayer(current => [...current, newData])
                                 console.log(player)
                             }
                         }
                               )
                 }
-                            else { setPlayer(current => ([...current, data])) }
+                            else { setPlayer(current => [...current, data]) }
                         }
               )
                     }
 
     async function fetchHeroTalent(name, realm) {
+        console.log(characterUrl+realm+'/'+name+'/'+characterSpecs+urlParams+token);
 return fetch(characterUrl+realm+'/'+name+'/'+characterSpecs+urlParams+token)
         .then(res => res.json())
 }
 
     const handleInput = (e) => {setSearch(e.target.value.toLowerCase());console.log(search)}
     const handleSubmit = () => {
+        console.log('handleSubmit called');
         if (player[0]) { if (player[0].npc) player.shift()}
         if (!player.some(e => e.name.toLowerCase() === search)) {
-        fetchCharacter(search, 'quelthalas') }
+            console.log('Fetching character:', search);
+        fetchCharacter(search, characterRealm) }
     }
 
     const generateArtesanos = () => ARTESANOS.map(e => {
         if (player[0]) { if (player[0].npc) player.shift()}
         if (!player.some(e => e.name.toLowerCase() === search)) {
-        fetch(characterUrl+characterRealm+'/'+e.toLowerCase()+urlParams+token)
-        .then(res => res.json())
-        .then(data => data.hasOwnProperty('code') ? console.log(`${e.charAt(0).toUpperCase()+e.toLowerCase().slice(1)} not found`) : setPlayer(current => [...current, data]))
+            fetchCharacter(e.toLowerCase(), characterRealm)
+        // fetch(characterUrl+characterRealm+'/'+e.toLowerCase()+urlParams+token)
+        // .then(res => res.json())
+        // .then(data => data.hasOwnProperty('code') ? console.log(`${e.charAt(0).toUpperCase()+e.toLowerCase().slice(1)} not found`) : setPlayer(current => [...current, data]))
     }})
 
     return html`
