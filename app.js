@@ -355,13 +355,7 @@ return fetch(characterUrl+realm+'/'+name+'/'+characterSpecs+urlParams+token)
     const handleSubmit = () => {
         if (player[0]) { if (player[0].npc) player.shift()}
         if (!player.some(e => e.name.toLowerCase() === search)) {
-        fetch(characterUrl+characterRealm+'/'+search+urlParams+token)
-        .then(res => res.json())
-        .then(data => data.hasOwnProperty('code') ? alert(`${search.charAt(0).toUpperCase()+search.slice(1)} not found`) : setPlayer(current => [...current, data]))
-        }
-        else {
-            alert('The name you provided is invalid or already exists in the table')
-        }
+        fetchCharacter(search, characterRealm)
     }
 
     const generateArtesanos = () => ARTESANOS.map(e => {
