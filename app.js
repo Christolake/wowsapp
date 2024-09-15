@@ -269,7 +269,7 @@ function initAuth() {
         .then(res => {
             console.log(res)
             token = res.data.access_token
-            API = `https://us.api.blizzard.com/profile/wow/character/quelthalas/${characterName}?namespace=profile-us&locale=en_US&access_token=${token}`
+            API = `https://us.api.blizzard.com/profile/wow/character/${characterRealm}/${characterName}?namespace=profile-us&locale=en_US&access_token=${token}`
         })
 }
 
