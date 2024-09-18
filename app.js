@@ -19,37 +19,74 @@ const adalid = {
 }
 
 const emHeroTalent = {
+    "San'layn": '🧛🏻‍♂️',
+    'Deathbringer': '🧟‍♂️',
+    'Rider of the Apocalypse': '🏇🏻',
+    'Aldrachi Reaver': '👾',
+    'Fel-Scarred': '🧬',
+    'Druid of the Claw': '🐈‍⬛',
+    "Elune's Chosen": '🌙',
+    'Keeper of the Grove': '🪶',
+    'Wildstalker': '🪸', 
+    'Chronowarden': '⏳',
+    'Flameshaper': '♨️',
+    'Scalecommander': '🥏',
+    'Pack Leader': '🦍',
+    'Dark Ranger': '🐦‍⬛',
+    'Sentinel': '🕊️',
+    'Spellslinger': '🪡',
+    'Frostfire': '☄️',
+    'Sunfury': '🐦‍🔥',
+    'Shado-Pan': '☯️',
+    'Conduit of the Celestials': '🦩',
+    'Master of Harmony': '🪷',
     'Herald of the Sun': '☀️',
-    'Templar': '⚒️',
-    'Lightsmith': '🫕',
+    'Templar': '👨🏼‍⚖️',
+    'Lightsmith': '⚜️',
+    'Oracle': '👁️',
+    'Voidweaver': '🌀',
+    'Archon': '🪽',
+    'Trickster': '🗡️',
+    'Deathstalker': '🦹🏼‍♂️',
+    'Fatebound': '🪙',
+    'Totemic': '🪵',
+    'Farseer': '🧞‍♂️',
+    'Stormbringer': '🌩️',
+    'Hellcaller': '🐐',
+    'Diabolist': '🧿',
+    'Soul Harvester': '🫀',
+    'Colossus': '🗽',
+    'Slayer': '🦸🏼‍♂️',
+    'Mountain Thane': '🔋'
 }
 
 const emSpec = {
-    blood: '🧛🏽‍♂️',
+    augmentation: '🪖',
+    blood: '🩸',
     frost: {
-        deathknight: '🥶',
-        mage: '⛄'
+        deathknight: '❄️',
+        mage: '🧊'
     },
-    unholy: '🧟‍♂️',
-    havoc: '🔱',
-    vengeance: '🦇',
-    devastation: '🪨',
-    preservation: '🪄',
+    unholy: '🩻',
+    havoc: '🦇',
+    vengeance: '🔱',
+    devastation: '❤️‍🔥',
+    preservation: '🌻',
     balance: '🦉',
-    feral: '🐯',
-    guardian: '🐻',
+    feral: '🐈',
+    guardian: '🧸',
     restoration: {
         druid: '🌳',
-        shaman: '💦'
+        shaman: '💧'
     },
     beasts: '🐾',
     marksmanship: '🎯',
     survival: '🕸️',
     arcane: '🔮',
     fire: '🔥',
-    brewmaster: '🍺',
-    mistweaver: '☁️',
-    windwalker: '💨',
+    brewmaster: '🐂',
+    mistweaver: '🐉',
+    windwalker: '🐅',
     holy: {
         paladin: '🌟',
         priest: '🧚🏽‍♂️'
@@ -59,24 +96,24 @@ const emSpec = {
         warrior: '🛡️'
     },
     retribution: '⚖️',
-    discipline: '🪩',
+    discipline: '📖',
     shadow: '👤',
     assassination: '🥷🏽',
-    outlaw: '🦹🏽‍♂️',
-    subtlety: '🫥',
+    outlaw: '🏴‍☠️',
+    subtlety: '🪤',
     enhancement: '🌋',
     elemental: '⚡',
     affliction: '🦠',
     demonology: '👹',
     destruction: '💥',
-    arms: '🗡️',
-    fury: '😡',
+    arms: '🤺',
+    fury: '💢',
     undefined: '❌'
 }
 const emClass = {
     deathknight: '☠️',
     demonhunter: '😈',
-    evoker: '🌈',
+    evoker: '🪁',
     druid: '🦁',    
     hunter: '🏹',
     mage: '🧙🏽‍♂️',
@@ -105,7 +142,7 @@ const emRace = {
     },
     gnome: '👶🏽',
     goblin: '👺',
-    highmountaintauren: '🏔️',
+    highmountaintauren: '🫎',
     human: '🧔🏽‍♂️',
     kultiran: '⚓',
     lightforgeddraenei: '🛸',
@@ -134,6 +171,27 @@ const emFaction = {
 }
 const examplePlayer = [{
     npc: true,
+    name: 'Urel Stoneheart',
+    faction: {
+        name: 'Neutral'
+    },
+    character__class: {
+        name: 'Paladin'
+    },
+    title: 'the King of the Earthen',
+    race: {
+        name: 'Earthen'
+    },
+    level: 80,
+    active_spec: {
+        name: 'Holy'
+    },
+    active_hero_talent_tree: {
+        name: 'Herald of the Sun'
+    },
+    average_item_level: 630
+},{
+    npc: true,
     name: 'Neltharion',
     faction: {
         name: 'Neutral'
@@ -148,6 +206,9 @@ const examplePlayer = [{
     level: 70,
     active_spec: {
         name: 'Devastation'
+    },
+    active_hero_talent_tree: {
+        name: 'Scalecommander'
     },
     average_item_level: 312
 },{
@@ -167,6 +228,9 @@ const examplePlayer = [{
     active_spec: {
         name: 'Havoc'
     },
+    active_hero_talent_tree: {
+        name: 'Fel-Scarred'
+    },
     average_item_level: 289
 },{
     npc: true,
@@ -184,6 +248,9 @@ const examplePlayer = [{
     level: 50,
     active_spec: {
         name: 'Frost'
+    },
+    active_hero_talent_tree: {
+        name: 'Deathbringer'
     },
     average_item_level: 185
 },{
@@ -203,6 +270,9 @@ const examplePlayer = [{
     active_spec: {
         name: 'Retribution'
     },
+    active_hero_talent_tree: {
+        name: 'Templar'
+    },
     average_item_level: 150
 },{
     npc: true,
@@ -221,6 +291,9 @@ const examplePlayer = [{
     active_spec: {
         name: 'Enhancement'
     },
+    active_hero_talent_tree: {
+        name: 'Stormbringer'
+    },
     average_item_level: 140
 },{
     npc: true,
@@ -238,6 +311,9 @@ const examplePlayer = [{
     level: 20,
     active_spec: {
         name: 'Brewmaster'
+    },
+    active_hero_talent_tree: {
+        name: 'Master of Harmony'
     },
     average_item_level: 65
 }]
@@ -337,7 +413,7 @@ function App() {
                         .then(hero => {
                             console.log(hero)
                             if (hero.hasOwnProperty('active_hero_talent_tree')) {
-                                const newData = {...data, active_hero_talent_tree: hero.active_hero_talent_tree};
+                                const newData = {...data, active_hero_talent_tree: hero.active_hero_talent_tree.name};
                                 setPlayer(current => [...current, newData])
                                 console.log(player)
                             }
