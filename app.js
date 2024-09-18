@@ -394,7 +394,7 @@ const addTheme = () => document.querySelector('html').getAttribute('data-theme')
 
 function App() {
 
-    const [player, setPlayer] = useState([examplePlayer[Math.floor(Math.random() * 6)]])
+    const [player, setPlayer] = useState([examplePlayer[Math.floor(Math.random() * 7)]])
     const [search, setSearch] = useState('')
     const [table, setTable] = useState('')
     const ARTESANOS = ['Lakhae', 'Elniloo', 'Kunfucion', 'Betacura', 'Ripyizuman', 'Tarahahun', 'Onironin', 'Taconhyhunte']
