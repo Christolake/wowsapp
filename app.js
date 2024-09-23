@@ -397,7 +397,7 @@ function App() {
     const [player, setPlayer] = useState([examplePlayer[Math.floor(Math.random() * 7)]])
     const [search, setSearch] = useState('')
     const [table, setTable] = useState('')
-    const ARTESANOS = ['Lakhae', 'Elniloo', 'Kunfucion', 'Betacura', 'Ripyizuman', 'Tarahahun', 'Onironin', 'Taconhyhunte']
+    const ARTESANOS = ['Lakhae', 'Kunfucion', 'Betacura', 'Ripyizuman, 'Onironin']
 
     async function fetchCharacter(name, realm) {
         fetch(characterUrl+realm+'/'+name+urlParams+token)
@@ -507,7 +507,7 @@ return fetch(characterUrl+realm+'/'+name+'/'+characterSpecs+urlParams+token)
                         (typeof emSpec[e.active_spec?.name.toLowerCase()] === 'object'
                         ? emSpec[e.active_spec.name.toLowerCase()][e.character_class.name.replace(/\s/g, '').toLowerCase()]
                         : emSpec[e.active_spec?.name.toLowerCase()])+
-                            (e.active_hero_tree && emHeroTalent[e.active_hero_talent_tree?.name.en_US])+
+                            (e.active_hero_talent_tree && emHeroTalent[e.active_hero_talent_tree?.name])+
                         (e.level >= 80 
                             ? Array.from(String(e.average_item_level).padStart(3, 0), Number).map(e => emNumbers[e]).join().replaceAll(',','')
                             : Array.from(String(e.level).padStart(3, 0), Number).map(e => emNumbers[e]).join().replaceAll(',',''))
